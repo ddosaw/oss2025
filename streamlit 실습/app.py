@@ -14,7 +14,7 @@ font_path = 'NanumGothic.ttf'
 def load_font(font_path):
     try:
         font_add = fm.fontManager.addfont(font_path)
-        fm._rebuild()
+        fm.fontManager.cache.clear() # _rebuild 대신 사용
         plt.rcParams['font.family'] = fm.fontManager.get_fontnames()
         return True
     except Exception as e:

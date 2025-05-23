@@ -23,7 +23,7 @@ st.header("부산 지역별 범죄 통계 비율")
 selected_location =st.selectbox("부산 지역구를 선택하세요",busan_location)
 plt.figure(figsize=(10, 10)) 
 plt.pie(df_without_total[selected_location], labels=df_without_total.index.tolist(), autopct='%1.1f%%', startangle=90)
-plt.axis('equal') sd
+plt.axis('equal') 
 st.pyplot(plt)
 
 

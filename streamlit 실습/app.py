@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import os
 
+import streamlit as st
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+import os
+
 # 한글 폰트 설정
 plt.rcParams['axes.unicode_minus'] = False
 
@@ -14,7 +19,12 @@ font_path = 'NanumGothic.ttf'
 def load_font(font_path):
     try:
         font_add = fm.fontManager.addfont(font_path)
-        fm.fontManager.cache.clear() # _rebuild 대신 사용
+        # 이전 버전 Matplotlib 호환성을 위한 캐시 삭제
+        for font in fm.fontManager.ttflist:
+            if font.filename == font_path:
+                fm.fontManager.defaultFont['ttf'] = font.name
+                break
+        fm._rebuild()
         plt.rcParams['font.family'] = fm.fontManager.get_fontnames()
         return True
     except Exception as e:
